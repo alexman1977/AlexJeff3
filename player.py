@@ -253,7 +253,7 @@ class Player(Animal):
                     """Kill the spider!"""
                     current_room.contents.kill()
                     current_room.contents.update_description()
-                elif current_room.contents.health == 'wounded':
+                elif current_room.contents.health == 'alive':
                     """Wound the spider"""
                     current_room.contents.wound()
                     current_room.contents.update_description()
