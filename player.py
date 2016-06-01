@@ -88,7 +88,7 @@ class Player(Animal):
 
         # if we are not new to this room and the room has a spider, let it attack
         if previous_room == current_room and current_room.has_thing(
-                'spider') and current_room.contents.health != 'dead':
+                'spider') and current_room.contents.health != 'dead' and action != 'h':
             current_room.contents.attack(self)
 
         return current_room
