@@ -56,6 +56,9 @@ class Player(Animal):
             visibility={self.visibility}, direction={self.direction},
             possessions={self.possessions}""".format(self=self)
 
+
+
+
     def handle_action(self, current_room, action='help'):
         """Do the specified action (default to showing the player their options).
 
@@ -83,12 +86,16 @@ class Player(Animal):
             self.attack(current_room)
         elif action == 'st' or action == 'i':
             self.status(current_room)
+
+        elif action == 'po' or action == 'u':
+            self.status(current_room)
         else:  # default to showing the player what they can do
-            self.help()
+            self.help(current_room)
+
 
         # if we are not new to this room and the room has a spider, let it attack
         if previous_room == current_room and current_room.has_thing(
-                'spider') and current_room.contents.health != 'dead' and action != 'h':
+                'spider') and current_room.contents.health != 'dead':
             current_room.contents.attack(self)
 
         return current_room
@@ -111,9 +118,14 @@ class Player(Animal):
         print('st or i - Show your current status (inventory)')
         print('h - Dislpay this help text')
         print('q - Quit the game')  # unlike the other commands, this is handled in the game loop
+
+        print('po-Put on whatever is in the room')
         print('')
+
         print('To do one of the things, type the command, then press [enter].')
+
         print('')
+
 
     def status(self, current_room):
         """Print the current status of the player."""
@@ -123,6 +135,8 @@ class Player(Animal):
         print('You are {health}.'.format(health=self.health))
         if self.visibility == 'invisible':
             print('You are invisible!')
+            put_on()
+
         if len(self.possessions) > 0:
             print('You possess the following items:')
             for p in self.possessions:
@@ -227,6 +241,21 @@ class Player(Animal):
         time.sleep(1)  # add a little drama...
         return current_room
 
+
+    def put_on(self, current_room):
+        """Put on whatever is in the room (requires object)"""
+
+        if current_room.contents is not None:
+            print('You picked up {description}. {emoji}'.format(description=current_room.contents.description,
+                                                                emoji=current_room.contents.emoji))
+            # pick up the object
+            self.possessions.append(current_room.contents)
+            # remove the object from the room
+            current_room.contents = 'ring'
+        else:
+            print('You see a ring with a blue saphire stone.')
+
+
     def pick_up(self, current_room):
         """Pick up whatever is in the room (requires object)"""
 
@@ -253,12 +282,12 @@ class Player(Animal):
                     """Kill the spider!"""
                     current_room.contents.kill()
                     current_room.contents.update_description()
-                elif current_room.contents.health == 'alive':
+                elif current_room.contents.health == 'wounded':
                     """Wound the spider"""
                     current_room.contents.wound()
                     current_room.contents.update_description()
-                else:
-                    print('OK, OK, it’s dead already!')
+                # else:
+                #     print('OK, OK, it’s dead already!')
             else:
                 print('You need a dagger to attack things.')
         # else: there is nothing to attack

@@ -21,7 +21,7 @@ Game play:
     create player
         prompt for name
         prompt for emoji
-        show user list of possible actions (i.e. display help)
+        show user list of possible actions (i.e. display Fhelp)
     display description of current (first) room
     prompt user to take an action
     each action is one iteration of the game loop
@@ -78,14 +78,15 @@ def rooms_setup():
     dagger = Dagger(description='a dagger, made of steel')
     spider = Spider(description='an extremely large, very hairy, very angry spider')
     treasure = Treasure(description='a large chest filled with treasure beyond your wildest imagination')
+    ring= Ring(description='a ring with a blue saphire that makes you invisible')
 
-    # print(repr(key))
-    # print(repr(dagger))
-    # print(repr(spider))
-    # print(repr(treasure))
+     print(repr(key))
+     print(repr(dagger))
+     print(repr(spider))
+     print(repr(treasure))
 
-    # create rooms (12 means row 1, column 2; 21 means row 2, column 1; and, so on...)
-    # doors are set to open if the player would have had to pass through it from the other side
+    create rooms (12 means row 1, column 2; 21 means row 2, column 1; and, so on...)
+    doors are set to open if the player would have had to pass through it from the other side
     room_12 = Room(contents=treasure, door_north=None, door_south='open', door_east=None, door_west=None,
                    description='You are in a circular room with gold leaf walls and a marble floor.',
                    adjacent_north=None, adjacent_south=None, adjacent_east=None, adjacent_west=None)
@@ -95,8 +96,8 @@ def rooms_setup():
     room_22 = Room(contents=spider, door_north='locked', door_south='open', door_east=None, door_west='closed',
                    description='You are in a large room with high ceilings.\nThere are doors to the North, West, and South.',
                    adjacent_north=None, adjacent_south=None, adjacent_east=None, adjacent_west=None)
-    room_31 = Room(contents=None, door_north=None, door_south=None, door_east='open', door_west=None,
-                   description='You are in an ornate bedroom.\nThe only door is the one in through which you came.',
+    room_31 = Room(contents=ring, door_north=None, door_south=None, door_east='open', door_west=None,
+                   description='You are in an ornate bedroom.You see a ring with a blue saphire\nThe only door is the one in through which you came.',
                    adjacent_north=None, adjacent_south=None, adjacent_east=None, adjacent_west=None)
     room_32 = Room(contents=None, door_north='closed', door_south=None, door_east='closed', door_west='closed',
                    description='You are in a small, dank room with no windows and low ceilings.\nYou see doors to the West, North, and East.',
@@ -105,7 +106,7 @@ def rooms_setup():
                    description='You are in a musty closet.\nThe only door is the one in through which you came.',
                    adjacent_north=None, adjacent_south=None, adjacent_east=None, adjacent_west=None)
 
-    # print(repr(room_32))
+    #print(repr(room_32))
 
     # link rooms to each other (after initialization because we need refs to each room)
     room_12.adjacent_south = room_22
@@ -126,7 +127,7 @@ def rooms_setup():
 
     room_33.adjacent_west = room_32
 
-    # print(repr(room_32))
+    #print(repr(room_32))
 
     return room_32
 
@@ -171,7 +172,7 @@ def end_game(player, game_state='underway'):
     if game_state == 'underway':  # player chose to exit the game
         print('Your loss! (Get it? Your loss because, by quitting the game early, you lost....)')
     elif game_state == 'victory':
-        print('Congratulations! You won! You are now {name}, Slayer of Spiders! {emoji}'.format(name=player.name,
+        print('Congratulations! You won! You are now {name}, Slayer of dead alreadys! {emoji}'.format(name=player.name,
                                                                                                 emoji=player.emoji))
     else:
         print('On noes! You died! So sorry for your luck.')
