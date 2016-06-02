@@ -94,7 +94,8 @@ class Player(Animal):
 
         # if we are not new to this room and the room has a spider, let it attack
         if previous_room == current_room and current_room.has_thing(
-                'spider') and current_room.contents.health != 'dead':
+                'spider') and current_room.contents.health != 'dead' and action != 'h':
+
             current_room.contents.attack(self)
 
         return current_room
@@ -245,14 +246,14 @@ class Player(Animal):
         """Put on whatever is in the room (requires object)"""
 
         if current_room.contents is not None:
-            print('You picked up {description}. {emoji}'.format(description=current_room.contents.description,
+            print('You put on {description}. {emoji}'.format(description=current_room.contents.description,
                                                                 emoji=current_room.contents.emoji))
             # pick up the object
             self.possessions.append(current_room.contents)
             # remove the object from the room
             current_room.contents = 'ring'
         else:
-            print('You see a ring with a blue saphire stone.')
+            print('There is nothing here to pick up.')
 
 
     def pick_up(self, current_room):
