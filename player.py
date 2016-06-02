@@ -42,14 +42,17 @@ class Player(Animal):
     Extends Animal
     """
 
-    def __init__(self, name, emoji):
+    def __init__(self, name, emoji,):
         description = name + ', Slayer of Pigeons! ' + emoji
         i_am_a = 'player'
         super().__init__(i_am_a, description, emoji)
         self.name = name
+        self.visibility = 'invisible'
+
         self.visibility = 'visible'
         self.direction = 'north'
         self.possessions = []
+        # put_on(self, current_room)
 
     def __repr__(self):
         return """Player(description={self.description}, i_am_a={self.i_am_a}, name={self.name},
@@ -86,8 +89,8 @@ class Player(Animal):
             self.attack(current_room)
         elif action == 'st' or action == 'i':
             self.status(current_room)
-        elif action == 'po' or action == 'u':
-            self.status(current_room)
+        elif action == 'po':
+            self.put_on()
         else:  # default to showing the player what they can do
             self.help()
 
@@ -135,7 +138,7 @@ class Player(Animal):
         print('You are {health}.'.format(health=self.health))
         if self.visibility == 'invisible':
             print('You are invisible!')
-            put_on()
+        # put_on(self, current_room)
 
         if len(self.possessions) > 0:
             print('You possess the following items:')
@@ -242,18 +245,22 @@ class Player(Animal):
         return current_room
 
 
-    def put_on(self, current_room):
+    def put_on(self):
         """Put on whatever is in the room (requires object)"""
-
-        if current_room.contents is not None:
-            print('You put on {description}. {emoji}'.format(description=current_room.contents.description,
-                                                                emoji=current_room.contents.emoji))
-            # pick up the object
-            self.possessions.append(current_room.contents)
+    #    print("Testing put on ")
+        # if current_room.contents is not None:
+        #print('You put on {description}. {emoji}'.format(description=current_room.contents.description,
+        #                                                         emoji=current_room.contents.emoji))
+            # put on the object
+        if self.has_thing('ring') == True:
+            self.visibility = 'invisible'
+#            self.possessions.append(current_room.contents)
             # remove the object from the room
-            current_room.contents = 'ring'
+            #current_room.contents = 'ring'
+    #        print("Testing on ")
+
         else:
-            print('There is nothing here to pick up.')
+             print('You do not have the ring.')
 
 
     def pick_up(self, current_room):
