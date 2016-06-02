@@ -86,11 +86,10 @@ class Player(Animal):
             self.attack(current_room)
         elif action == 'st' or action == 'i':
             self.status(current_room)
-
         elif action == 'po' or action == 'u':
             self.status(current_room)
         else:  # default to showing the player what they can do
-            self.help(current_room)
+            self.help()
 
 
         # if we are not new to this room and the room has a spider, let it attack
