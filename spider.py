@@ -43,11 +43,17 @@ class Spider(Animal):
 
     def attack(self, player):
         """Attack the player!"""
-        if player.health == 'alive':
-            player.health = 'alive'
+        if player.visibility == 'invisible':
+            print('You are invisible to the spider {emoji}'.format(emoji=self.emoji))
+            print('')
+            time.sleep(1)
+
+        elif player.health == 'alive':
+            player.health = 'wounded'
             print('The spider wounded you! {emoji}'.format(emoji=self.emoji))
             print('')
-            time.sleep(1)  # add a little drama...
+              # add a little drama...
+
         elif player.health == 'wounded':
             player.health = 'dead'
             print('The spider killed you! {emoji}'.format(emoji=self.emoji))
