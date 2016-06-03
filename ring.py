@@ -10,7 +10,7 @@ State:
 """
 
 
-class ring(GenericObject):
+class Ring(GenericObject):
     """Blueprint for a ring in the Dungeon of Doom!
 
     Extends GenericObject
