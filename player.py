@@ -122,7 +122,7 @@ class Player(Animal):
         print('h - Dislpay this help text')
         print('q - Quit the game')  # unlike the other commands, this is handled in the game loop
 
-        print('po-Put on whatever is in the room')
+        print('po - Put on whatever is in the room')
         print('')
 
         print('To do one of the things, type the command, then press [enter].')
@@ -249,7 +249,7 @@ class Player(Animal):
         """Put on whatever is in the room (requires object)"""
     #    print("Testing put on ")
         # if current_room.contents is not None:
-        #print('You put on {description}. {emoji}'.format(description=current_room.contents.description,
+        print('You put on a ring with a blue sapphire that makes you invisible.'' ''💍')#{description}. {emoji}.format(description=current_room.contents.description,
         #                                                         emoji=current_room.contents.emoji))
             # put on the object
         if self.has_thing('ring') == True:
@@ -289,7 +289,7 @@ class Player(Animal):
                     """Kill the spider!"""
                     current_room.contents.kill()
                     current_room.contents.update_description()
-                elif current_room.contents.health == 'wounded':
+                elif current_room.contents.health == 'alive':
                     """Wound the spider"""
                     current_room.contents.wound()
                     current_room.contents.update_description()
