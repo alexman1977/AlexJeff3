@@ -98,7 +98,7 @@ def rooms_setup():
                    description='You are in a large room with high ceilings.\nThere are doors to the North, West, and South.',
                    adjacent_north=None, adjacent_south=None, adjacent_east=None, adjacent_west=None)
     room_31 = Room(contents=ring, door_north=None, door_south=None, door_east='open', door_west=None,
-                   description='You are in an ornate bedroom.You see a ring with a blue saphire\nThe only door is the one in through which you came.',
+                   description='You are in an ornate bedroom.\nThe only door is the one in through which you came.',
                    adjacent_north=None, adjacent_south=None, adjacent_east=None, adjacent_west=None)
     room_32 = Room(contents=None, door_north='closed', door_south=None, door_east='closed', door_west='closed',
                    description='You are in a small, dank room with no windows and low ceilings.\nYou see doors to the West, North, and East.',
